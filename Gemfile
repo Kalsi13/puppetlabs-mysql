@@ -3,4 +3,5 @@ source ENV['GEM_SOURCE'] || "https://rubygems.org"
   gem 'rspec-puppet'
   gem 'puppetlabs_spec_helper'
   gem 'puppet-lint'
+  gem 'puppet_facts'
 
