@@ -1,9 +1,9 @@
 HOSTS: 
-  centos: 
+  ubuntu-12-10: 
     roles:
       - master  
-    platform: centos-65-x64
-    image: centos
+    platform: ubuntu-12.10-x64
+    image: ubuntu:12.10
     hypervisor: docker 
     docker_cmd: '["/sbin/init"]' 
 CONFIG: 
