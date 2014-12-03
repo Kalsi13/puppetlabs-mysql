@@ -1,9 +1,9 @@
 HOSTS: 
-  centos-6: 
+  centos: 
     roles:
       - master  
     platform: centos-6-x86_64
-    image: centos
+    image: centos6
     hypervisor: docker 
     docker_cmd: '["/sbin/init"]' 
 CONFIG: 
