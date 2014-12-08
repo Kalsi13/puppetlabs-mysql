@@ -1,11 +1,8 @@
 HOSTS:
-  centos-65-x64:
-    roles:
-      - master
-    platform: el-6-x86_64
-    box : centos-65-x64-vbox436-nocm
-    image : pcfens/beaker-centos
-    hypervisor : docker
+  ubuntu-13-10:
+    platform: ubuntu-13.10-x64
+    image: ubuntu:13.10
+    hypervisor: docker
     docker_cmd: '/sbin/init'
-CONFIG:
+CONFIG: 
   type: foss
