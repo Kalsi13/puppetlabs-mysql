@@ -1,10 +1,10 @@
 HOSTS:
-    ubuntu-server:
-        roles:
-         - master
-        platform: ubuntu-12.10-x64
-        image: ubuntu-upstart:12.10
-        hypervisor: docker
-        docker_cmd: [/sbin/init]
+  centos-65-x64:
+    roles:
+      - master
+    platform: el-6-x86_64
+    box : centos-65-x64-vbox436-nocm
+    image : centos
+    hypervisor : docker
 CONFIG:
   type: foss
