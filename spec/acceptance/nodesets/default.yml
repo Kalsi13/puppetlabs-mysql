@@ -5,5 +5,4 @@ HOSTS:
   hypervisor : docker
   docker_cmd: '/sbin/init'
 CONFIG:
-  log_level: verbose
-  type: git
+  type: foss
