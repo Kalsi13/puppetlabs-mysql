@@ -1,7 +1,7 @@
 HOSTS:
-  ubuntu-15-04:
-    platform: ubuntu-15.04-x64
-    image: ubuntu:15.04
+  centos-7:
+    platform: centos-7-x64
+    image: centos:7
     hypervisor: docker
 CONFIG: 
   type: foss
