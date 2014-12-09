@@ -1,7 +1,7 @@
 HOSTS:
-  ubuntu-11-20:
-    platform: ubuntu-11.20-x64
-    image: ubuntu:11.20
+  ubuntu-11-10:
+    platform: ubuntu-11.10-x64
+    image: ubuntu:11.10
     hypervisor: docker
     docker_cmd: '/sbin/init'
 CONFIG: 
