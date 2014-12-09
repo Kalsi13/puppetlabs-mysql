@@ -2,8 +2,6 @@ HOSTS:
   ubuntu-12-10:
   roles:
    -master
-   -database
-   -dashboard
   platform: ubuntu-12.10-x64
   image: ubuntu:12.10
   hypervisor: docker
