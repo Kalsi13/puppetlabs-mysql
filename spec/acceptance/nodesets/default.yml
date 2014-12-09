@@ -1,7 +1,10 @@
 HOSTS:
-  ubuntu-12-10:
-    platform: ubuntu-12.10-x64
-    image: ubuntu:12.10
-    hypervisor: docker
+  ubuntu-12-10: 
+    platform: ubuntu-12.10-x64 
+    image: ubuntu:12.10 
+    hypervisor: docker 
+    docker_image_commands: 
+      - 'apt-get install -y myapp' 
+      - 'myapp --setup' 
 CONFIG: 
   type: foss
