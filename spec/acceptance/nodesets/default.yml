@@ -1,8 +1,9 @@
-HOSTS:
-  ubuntu-10-04:
-    platform: ubuntu-10.04-x64
-    image: ubuntu:10.04
-    hypervisor: docker
-    docker_cmd: '/sbin/init'
-CONFIG: 
-  type: foss
+  HOSTS:
+  ubuntu-server-12042-x64:
+  platform: ubuntu-12.04-amd64
+  image: ubuntu:12.04
+  hypervisor : docker
+  docker_cmd: '/sbin/init'
+CONFIG:
+  log_level: verbose
+  type: git
