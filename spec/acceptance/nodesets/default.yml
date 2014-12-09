@@ -1,4 +1,4 @@
-  HOSTS:
+HOSTS:
   ubuntu-server-12042-x64:
   platform: ubuntu-12.04-amd64
   image: ubuntu:12.04
