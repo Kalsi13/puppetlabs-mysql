@@ -1,7 +1,7 @@
 HOSTS:
-  ubuntu-12-00:
-    platform: ubuntu-12.00-x64
-    image: ubuntu:12.00
+  ubuntu-12-04-5:
+    platform: ubuntu-12.04.5-x64
+    image: ubuntu:12.04.5
     hypervisor: docker
 CONFIG: 
   type: foss
