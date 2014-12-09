@@ -1,5 +1,5 @@
 HOSTS:
-  ubuntu-13-10:
+  ubuntu-12-04:
     platform: ubuntu-12.04-x64
     image: ubuntu:12.04
     hypervisor: docker
