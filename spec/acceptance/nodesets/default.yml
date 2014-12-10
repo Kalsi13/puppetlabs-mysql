@@ -1,7 +1,8 @@
-HOSTS:
-  ubuntu-12-10:
-    platform: ubuntu-12.10-x64
-    image: 02d5fbb002b0
-    hypervisor: docker
+HOSTS: 
+  ubuntu-12-10: 
+  platform: ubuntu-12.10-x64 
+  image: ubuntu:12.10 
+  hypervisor: docker 
+  docker_cmd: '["/sbin/init"]' 
 CONFIG: 
   type: foss
