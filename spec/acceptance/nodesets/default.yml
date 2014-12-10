@@ -1,7 +1,7 @@
 HOSTS:
-  centos-6:
-    platform: centos-6-x64
-    image: solarkennedy/centos-6-puppet
+  ubuntu-12-10:
+    platform: ubuntu-12.10-x64
+    image: ubuntu:12.10
     hypervisor: docker
 CONFIG: 
   type: foss
