@@ -4,7 +4,7 @@ RUN yum install -y \
 	git\
 	ntpdate\
 	curl\
-	sshd\
+	openssh-server\
 	ruby\
 	rdoc;\
 	yum -y clean all;
