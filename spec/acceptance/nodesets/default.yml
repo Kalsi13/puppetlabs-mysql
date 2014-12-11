@@ -1,14 +1,14 @@
 # DOCKER-VERSION 0.3.4
-FROM    centos:centos7
-RUN yum install -y \
+FROM    ubuntu:ubuntu:12.10
+RUN apt-get install -y \
 	git\
 	ntpdate\
 	curl\
 	openssh-server\
 	ruby\
 	rdoc;\
-	yum -y clean all;
-RUN yum install -y \
+#	yum -y clean all;
+RUN apt-get install -y \
 	openssh\
 	openssh-clients\
 	redhat-lsb;
