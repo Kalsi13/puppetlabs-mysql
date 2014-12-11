@@ -1,18 +1,8 @@
-# DOCKER-VERSION 0.3.4
-FROM    ubuntu:ubuntu:12.10
-RUN apt-get install -y \
-	git\
-	ntpdate\
-	curl\
-	openssh-server\
-	ruby\
-	rdoc;\
-#	yum -y clean all;
-RUN apt-get install -y \
-	openssh\
-	openssh-clients\
-	redhat-lsb;
-RUN mkdir -p /var/run/sshd
-RUN echo root:root | chpasswd
-EXPOSE 22
-CMD /usr/sbin/sshd -D
+HOSTS:
+  ubuntu-12-10:
+    platform: ubuntu-12.10-x64
+    image: ubuntu:12.10
+    hypervisor: docker
+    docker_cmd: '/usr/sbin/sshd -D'
+CONFIG: 
+  type: foss
