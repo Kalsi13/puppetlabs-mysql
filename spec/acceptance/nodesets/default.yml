@@ -1,8 +1,11 @@
 HOSTS:
   ubuntu-12-10:
     platform: ubuntu-12.10-x64
-    image: newimage:latest
-    hypervisor: docker  
-    docker_cmd: '/usr/sbin/sshd -D'
-CONFIG: 
-  type: foss
+    image: ubuntu:12.10
+    hypervisor: docker
+    docker_image_commands:
++      - 'echo "deb http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" > /etc/apt/sources.list'
++      - 'echo "deb-src http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" >> /etc/apt/sources.list'
+     docker_cmd: '/usr/sbin/sshd -D'
+ CONFIG: 
+   type: foss
