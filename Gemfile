@@ -14,3 +14,5 @@ end
 
 group :system_tests do
   gem 'beaker-rspec',  :require => false
+end   
+  
