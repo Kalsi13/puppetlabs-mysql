@@ -8,11 +8,6 @@ hosts.each do |host|
   on host, "mkdir -p #{host['distmoduledir']}"
 end
 
-class String
-  def force_encoding(enc)
-    self
-  end
-
 RSpec.configure do |c|
   # Project root
   proj_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
