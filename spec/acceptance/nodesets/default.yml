@@ -4,6 +4,6 @@ HOSTS:
       - master
     hypervisor: docker
     platform: ubuntu-12.10-x64
-    image: clunge5  
+    image: clunge6  
 CONFIG: 
   type: foss
