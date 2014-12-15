@@ -1,12 +1,12 @@
 HOSTS:
- ubuntu.12.10:
+ ubuntu-12-10:
     roles:
       - master
     platform: ubuntu-12.10-x64
     image: ubuntu:12.10
     hypervisor: docker
     docker_image_commands:
-  - 'echo "deb http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" > /etc/apt/sources.list'
-  - 'echo "deb-src http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" >> /etc/apt/sources.list'
+      - 'echo "deb http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" > /etc/apt/sources.list'
+      - 'echo "deb-src http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" >> /etc/apt/sources.list'
 CONFIG: 
   type: foss
