@@ -6,6 +6,5 @@ HOSTS:
     docker_image_commands:
   - 'echo "deb http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" > /etc/apt/sources.list'
   - 'echo "deb-src http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" >> /etc/apt/sources.list'
-  docker_cmd: '/usr/sbin/sshd -D'
 CONFIG: 
   type: foss
