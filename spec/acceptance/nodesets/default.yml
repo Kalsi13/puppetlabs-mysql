@@ -3,10 +3,7 @@ HOSTS:
     roles:
       - master
     hypervisor: docker
-    docker_image_commands:
-      - 'echo "deb http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" > /etc/apt/sources.list'
-      - 'echo "deb-src http://old-releases.ubuntu.com/ubuntu/ quantal main restricted" >> /etc/apt/sources.list'
     platform: ubuntu-12.10-x64
-    image: ubuntu:12.10
+    image: clunge
 CONFIG: 
   type: foss
