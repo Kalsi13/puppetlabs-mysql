@@ -1,5 +1,5 @@
 HOSTS:
-  ubuntu-12-10:
+ ubuntu:
     roles:
       - master
     platform: ubuntu-12.10-x64
