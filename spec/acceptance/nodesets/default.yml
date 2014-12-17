@@ -1,9 +1,7 @@
 HOSTS:
- ubuntu-12-10:
-    roles:
-      - master
-    hypervisor: docker
+  ubuntu-12-10:
     platform: ubuntu-12.10-x64
-    image: 78ea2e5f7719  
+    image: ubuntu:12.10
+    hypervisor: docker
 CONFIG: 
   type: foss
