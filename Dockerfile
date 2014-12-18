@@ -15,6 +15,6 @@ RUN yum install -y \
 RUN mkdir -p /var/run/sshd
 RUN echo root:root | chpasswd
 EXPOSE 22
-CMD /usr/sbin/sshd -D
+CMD ["/usr/sbin/sshd", "-D"]
 	
 
