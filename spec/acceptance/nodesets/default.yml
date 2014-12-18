@@ -1,7 +1,7 @@
 HOSTS:
   ubuntu-12-10:
     platform: ubuntu-12.10-x64
-    image: 18thdec
+    image: 2030c4bb5379
     hypervisor: docker
     docker_cmd: '/usr/sbin/sshd -D'
 CONFIG: 
