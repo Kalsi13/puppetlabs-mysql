@@ -10,6 +10,7 @@ group :development, :unit_tests do
   gem 'json',                    :require => false
   gem 'rspec-core',              :require => false
   gem 'beaker-rspec',            :require => false
+  gem 'beaker', github: 'puppetlabs/beaker', branch: 'master'
 end
 
 group :system_tests do
