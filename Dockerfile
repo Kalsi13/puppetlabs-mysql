@@ -1,4 +1,5 @@
 # DOCKER-VERSION 0.3.4
+EXPOSE 22 
 FROM    centos:centos6
 RUN yum install -y \
 	git\
