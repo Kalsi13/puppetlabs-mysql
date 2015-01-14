@@ -1,1 +1,1 @@
-"test" # lint:ignore:double_quoted_strings for a good reason
+"test" # lint:ignore:double_quoted_strings
