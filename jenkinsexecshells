@@ -1,0 +1,36 @@
+#!/bin/bash
+export PATH=$PATH:/usr/local/rvm/gems/ruby-2.1.5/bin:/usr/local/rvm/gems/ruby-2.1.5@global/bin:/usr/local/rvm/rubies/ruby-2.1.5/bin:/usr/local/rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/devops/bin
+cd puppet-xtreemfs/
+bundle install --without development --path .vendor
+bundle exec rake acceptance RS_SET=centos-65-x64-docker
+
+#!/bin/bash
+export PATH=$PATH:/usr/local/rvm/gems/ruby-2.1.5/bin:/usr/local/rvm/gems/ruby-2.1.5@global/bin:/usr/local/rvm/rubies/ruby-2.1.5/bin:/usr/local/rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/devops/bin
+for file in $(find . -iname '*.pp')
+do
+puppet parser validate \
+--render-as s \
+--modulepath=modules \
+"$file" || exit 1;
+done
+find . -iname *.pp -exec puppet-lint --log-format "%{path}:%{line}:%{check}:%{KIND}:%{message}" {} \;
+
+#!/bin/bash
+export PATH=$PATH:/usr/local/rvm/gems/ruby-2.1.5/bin:/usr/local/rvm/gems/ruby-2.1.5@global/bin:/usr/local/rvm/rubies/ruby-2.1.5/bin:/usr/local/rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/devops/bin
+echo "--require rspec/legacy_formatters" >> .rspec
+export CI_REPORTS=results
+rake ci:setup:rspec spec
+
+#!/bin/bash
+export PATH=$PATH:/usr/local/rvm/gems/ruby-2.1.5/bin:/usr/local/rvm/gems/ruby-2.1.5@global/bin:/usr/local/rvm/rubies/ruby-2.1.5/bin:/usr/local/rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/devops/bin
+## Cleanup old docs.
+[ -d doc/ ] && rm -rf doc/
+## Dummy manifests folder.
+! [ -d manifests/ ] && mkdir manifests/
+## Generate docs
+puppet doc --mode rdoc --manifestdir manifests/ --modulepath ./modules/ --outputdir doc
+## Fix docs to remove the complete workspace from all file paths.
+if [ -d ${WORKSPACE}/doc/files/${WORKSPACE}/modules ]; then
+mv -v "${WORKSPACE}/doc/files/${WORKSPACE}/modules" "${WORKSPACE}/doc/files/modules"
+fi
+grep -l -R ${WORKSPACE} * | while read fname; do perl -pi -e "s@${WORKSPACE}/@/@g" $fname; done
