@@ -1,0 +1,143 @@
+#create IOD -
+
+#Update everything yo 
+
+  yum update -y
+  yum install -y git gem ruby-devel libxml2 libxml2-devel.x86_64 libxml2-static.x86_64 perl-XML-LibXML.x86_64 libxslt-devel.x86_64 libxslt.x86_64 perl-XML-LibXSLT.x86_64 cloud-utils
+  yum -y groupinstall "Development Tools"
+  yum -y install wget
+
+
+ #clone into GIT 
+
+  #changes the ports up 
+iptables -F
+iptables -X
+iptables -t nat -F
+iptables -t nat -X
+iptables -t mangle -F
+iptables -t mangle -X
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+service iptables save 
+
+#get the old version of docker to later update 
+ yum -y install docker-io
+ service docker start
+ chkconfig docker on
+ cd ~
+
+ # Change our /etc/ssh/sshd_config file to use port 2323 instead of port 22 for ssh.
+  # Maybe we can use port 22 for Docker now..?
+
+  perl -pi -e 's/^#?Port 22$/Port 2323/' /etc/ssh/sshd_config
+
+  # Don't bother doing semanage on CentOS 6, because there's not a snowball's chance
+  # in hell of getting it working (and we don't need it anyway).
+
+  #semanage port -a -t ssh_port_t -p tcp 2323
+  service sshd restart
+
+  # Set up Jenkins.
+
+  yum -y install java-1.6.0-openjdk.x86_64 dejavu-sans-fonts
+  wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+  rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+  yum -y install jenkins
+  chkconfig jenkins on
+  service jenkins start
+
+  # Install Ruby the old-fashioned way, compiling from source. This
+  # takes a really, really long time but I think it's the only way
+  # to get 1.9.3 on the machine ready for Jenkins to use RVM-installed
+  # 1.9.3. Maybe we can install 1.9.3 from a repo?
+
+  wget http://cache.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p551.tar.gz
+  tar -zxvf *.tar.gz
+  cd ruby*
+  ./configure
+  make && make install
+
+  #change jenkins to super user 
+vi etc/passwd (change last line from 'false' to 'sh')
+usermod -a -G wheel jenkins
+
+#open new tab and log into jenkins
+sudo su jenkins
+
+#give it all the permissions 
+chown -R jenkins:wheel /root 
+chown -R jenkins:wheel /usr/local
+
+#update docker 
+sudo service docker stop
+wget https://get.docker.com/builds/Linux/x86_64/docker-latest -O /usr/bin/docker
+cd usr/bin
+chmod +x docker 
+
+#install the pluggins to jenkins
+cd /var/lib/jenkins/plugins
+
+  # ... Delete any rake instances...
+
+  sudo rm -r rake*
+
+  # ... Get 1.7.8 (1.8.0 fucks everything up)...
+
+  wget https://updates.jenkins-ci.org/download/plugins/rake/1.7.8/rake.hpi
+
+  # ... Install literally everything else manually...
+
+  plugins_to_install=(svnpublisher github-api ssh-agent rubyMetrics git ruby-runtime git-client scm-api github analysis-core warnings token-macro rvm build-monitor-plugin)
+
+  for i in ${plugins_to_install[@]}; do
+    wget "https://updates.jenkins-ci.org/latest/${i}.hpi"
+  done
+
+  cd ~
+
+  # ... Restart Jenkins!
+
+  service jenkins restart
+
+#download RVM and installr ruby
+gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+curl -L get.rvm.io | bash -s stable
+source /etc/profile.d/rvm.sh
+rvm install ruby-2.1
+
+#give more ownership to jenkins
+chown -R jenkins:wheel /root/puppetlabs-mysql/
+chown -R jenkins:wheel /usr/local/rvm/rubies/ruby-2.1.5
+
+#go into your jenkins terminal and export the paths over then install the gems, will have to use sudo 
+
+yes | gem install bundler rake rspec rspec-legacy_formatters puppet_facts puppet rspec-puppet puppetlabs_spec_helper puppet-lint --no-ri --no-rdoc
+
+  # Set up rspec.
+
+  yes | gem install rspec-mocks -v 2.99.0 --no-ri --no-rdoc
+  yes | gem install rspec-core -v 2.99.0 --no-ri --no-rdoc
+  yes | gem install rspec-expectations -v 2.99.0 --no-ri --no-rdoc
+  yes | gem install ci_reporter -v 1.8 --no-ri --no-rdoc
+  yes | gem install beaker-rspec --no-ri --no-rdoc
+
+
+  # Install beaker.
+
+  yes | gem uninstall beaker
+  git clone https://github.com/puppetlabs/beaker
+  cd beaker
+  yes | gem build beaker.gemspec
+  yes | gem install ./beaker-*.gem --no-ri --no-rdoc
+  yes | gem install bundler --no-ri --no-rdoc
+  bundle install
+
+
+  #configure jenkins with the same old rubbish and export the paths
+
+  #make sure to restart docker and then chmod docker.sock
+
+  # If you get permission errors with docker.sock in var/run then just reboot the IOD, it must reset every permission or something
